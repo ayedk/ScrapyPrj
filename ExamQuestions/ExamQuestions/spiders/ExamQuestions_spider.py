@@ -44,7 +44,7 @@ class ExamQuestionsSpider(scrapy.Spider):
         self.ExamName=getattr(self,'Exam')
         self.BatchSize=getattr(self,'BatchSize')
         
-        LinksFile = '..\Exams\\'+str(self.ExamName).upper()+'\Links\LinksFor_'+self.ExamName+'.json' 
+        LinksFile = '..\\Exams\\'+str(self.ExamName).upper()+'\\Links\\LinksFor_'+self.ExamName+'.json' 
         with open(LinksFile) as json_file :
             self.LinksList = json.load(json_file)
             self.LinksList = sorted(self.LinksList, key=itemgetter('Topic','Question')) 
@@ -67,7 +67,7 @@ class ExamQuestionsSpider(scrapy.Spider):
         if ((self.LinkNumber % int(self.BatchSize) ==0 ) and (self.LinkNumber / int(self.BatchSize)>0)) or (int(len(self.LinksList))==int(self.LinkNumber)):
             
             self.FileNumber+=1
-            HtmlFile =  '..\Exams\\'+str(self.ExamName).upper()+'\HtmlFiles\\'+str(self.ExamName).upper()+'_QuestionsList_'+str(self.FileNumber)+'.html'
+            HtmlFile =  '..\\Exams\\'+str(self.ExamName).upper()+'\\HtmlFiles\\'+str(self.ExamName).upper()+'_QuestionsList_'+str(self.FileNumber)+'.html'
             os.makedirs(os.path.dirname(HtmlFile), exist_ok=True)
             with open(HtmlFile, 'w+', encoding="utf-8") as f:
                 print(self.baseHtml ,file=f)
