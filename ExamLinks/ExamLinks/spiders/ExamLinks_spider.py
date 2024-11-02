@@ -40,7 +40,7 @@ class ExamLinksSpider(scrapy.Spider):
                         ) 
         
         if int(self.PagesNumber)==self.page_number: 
-            LinksFile = '..\Exams\\'+str(self.ExamName).upper()+'\Links\LinksFor_'+self.ExamName+'.json'
+            LinksFile = '..\\Exams\\'+str(self.ExamName).upper()+'\\Links\\LinksFor_'+self.ExamName+'.json'
             os.makedirs(os.path.dirname(LinksFile), exist_ok=True)
             with open(LinksFile, 'w+', encoding="utf-8") as FLink:
                 self.LinksList = sorted(self.LinksList, key=itemgetter('Topic','Question')) 
@@ -48,18 +48,7 @@ class ExamLinksSpider(scrapy.Spider):
             raise CloseSpider("END oF Links"); 
         self.page_number+=1
         
-        """self.page_number += 1
-        if self.page_number == 100: 
-            LinksFile = '..\Exams\\'+str(self.ExamName).upper()+'\Links\LinksFor_'+self.ExamName+'.json'
-            os.makedirs(os.path.dirname(LinksFile), exist_ok=True)
-            with open(LinksFile, 'w+', encoding="utf-8") as FLink:
-                self.LinksList = sorted(self.LinksList, key=itemgetter('Topic','Question')) 
-                json.dump(self.LinksList, FLink) 
-            raise CloseSpider("END oF Links"); """
-        
-        
-        """next_page = str(self.base_url)+'/discussions/microsoft/' + str(self.page_number)
-        yield scrapy.Request(next_page, callback=self.parse)"""
+
  
 #cd "C:\Users\ayed.klila\OneDrive - CED Cloud\Bureaublad\ScrapyProjects\ExamLinks" | scrapy crawl ExamLinks -a Exam="dp-300" -a PagesNumber=1400  
 #cd "C:\Users\ayed.klila\OneDrive - CED Cloud\Bureaublad\ScrapyProjects\ExamQuestions" | scrapy crawl ExamQuestions -a Exam="dp-300" -a BatchSize=50
